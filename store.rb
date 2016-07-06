@@ -2,7 +2,6 @@
 require 'httparty'
 require 'json'
 require 'faker'
-require 'pry'
 require_relative '../config/envirovar.rb'
 
 class ApiCall
@@ -37,7 +36,7 @@ class List
     list_id['id']
   end
 
-  def random_list_values
+  def random_values
      {
        :name => Faker::Lorem.word,
        :contact => {
@@ -60,41 +59,12 @@ class List
   end
 
   def list_creater
-    api.fire('/lists', random_list_values)
+    api.fire('/lists', random_values)
   end
 
-  Mclist = Struct.new(:id)
-
-  def idify(response)
-    Mclist.new(response['id'])
-  end
 end
 
-# class Storerator
-#
-#   def set_order_ids
-#     @storeid =
-#   end
-#
-#   def store_json
-#
-#     storejson = {
-#             :id => "#{random_strng}",
-#             :list_id => @list_id,
-#             :name => "#{random_strng}",
-#             :platform => "#{random_strng}",
-#             :domain => "#{random_strng}",
-#             :email_address => "#{random_email}",
-#             :currency_code => "USD",
-#             :money_format => "$",
-#             :primary_locale => "en",
-#             :phone => "#{random_phone}"
-#           }.to_json
-#
-# end
+
 
 
  a = List.new(:api => ApiCall.new(@apikey))
-
-
-binding.pry
